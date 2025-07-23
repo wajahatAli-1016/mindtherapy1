@@ -1654,4 +1654,265 @@
   justify-content: center;
   width: 2.5rem;
   height: 2.5rem;
+}
+
+/* Conversation Card Styles */
+.conversationCardModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  animation: conversationCardSlideIn 0.3s ease-out;
+  z-index: 1001;
+}
+
+@keyframes conversationCardSlideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.conversationCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #88ecd7 0%, #c7e08c 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.conversationCardTitle h2 {
+  margin: 0 0 0.5rem 0;
+  color: rgb(10, 70, 28);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.conversationCardMeta {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.conversationCardDate,
+.conversationCardDuration,
+.conversationCardCount {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-weight: 500;
+}
+
+.conversationCardContent {
+  padding: 2rem;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.conversationCardSummary,
+.conversationCardTags,
+.conversationCardMessages,
+.conversationCardSessionInfo {
+  margin-bottom: 2rem;
+}
+
+.conversationCardSummary h4,
+.conversationCardTags h4,
+.conversationCardMessages h4,
+.conversationCardSessionInfo h4 {
+  color: rgb(10, 70, 28);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.conversationCardSummary p {
+  background: rgba(136, 236, 215, 0.1);
+  padding: 1rem;
+  border-radius: 10px;
+  border-left: 4px solid #88ecd7;
+  margin: 0;
+  line-height: 1.6;
+  color: #333;
+}
+
+.tagsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.conversationCardMessagesHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.expandButton {
+  background: linear-gradient(135deg, #88ecd7 0%, #c7e08c 100%);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  color: rgb(10, 70, 28);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.85rem;
+}
+
+.expandButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(136, 236, 215, 0.3);
+}
+
+.conversationCardMessagesList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.conversationCardMessage {
+  padding: 1rem;
+  border-radius: 15px;
+  position: relative;
+  animation: messageSlideIn 0.3s ease-out;
+}
+
+.conversationCardMessage.userMessage {
+  background: linear-gradient(135deg, #88ecd7 0%, #c7e08c 100%);
+  margin-left: 2rem;
+  border-bottom-right-radius: 5px;
+}
+
+.conversationCardMessage.aiMessage {
+  background: rgba(255, 255, 255, 0.8);
+  margin-right: 2rem;
+  border: 1px solid rgba(136, 236, 215, 0.3);
+  border-bottom-left-radius: 5px;
+}
+
+.conversationCardMessageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.conversationCardMessageSender {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.userIcon {
+  color: rgb(10, 70, 28);
+}
+
+.aiIcon {
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.conversationCardMessageTime {
+  font-size: 0.8rem;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 500;
+}
+
+.conversationCardMessageContent {
+  line-height: 1.6;
+  color: #333;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.conversationCardNoMessages {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-style: italic;
+}
+
+.conversationCardShowMore {
+  text-align: center;
+  padding: 1rem;
+  background: rgba(136, 236, 215, 0.1);
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+
+.conversationCardShowMore p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.conversationCardSessionDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background: rgba(136, 236, 215, 0.1);
+  padding: 1rem;
+  border-radius: 10px;
+  border-left: 4px solid #88ecd7;
+}
+
+.conversationCardSessionDetails span {
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 500;
+}
+
+/* Responsive design for conversation card */
+@media (max-width: 768px) {
+  .conversationCardModal {
+    width: 95%;
+    max-height: 95vh;
+  }
+  
+  .conversationCardHeader {
+    padding: 1rem;
+  }
+  
+  .conversationCardTitle h2 {
+    font-size: 1.2rem;
+  }
+  
+  .conversationCardMeta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .conversationCardContent {
+    padding: 1rem;
+  }
+  
+  .conversationCardMessage.userMessage {
+    margin-left: 1rem;
+  }
+  
+  .conversationCardMessage.aiMessage {
+    margin-right: 1rem;
+  }
 } 

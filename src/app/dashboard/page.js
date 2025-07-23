@@ -473,10 +473,7 @@ export default function Dashboard() {
       <ConversationHistory 
         isOpen={showConversationHistory} 
         onClose={() => setShowConversationHistory(false)}
-        onLoadConversation={(conversation) => {
-          setConversationToLoad(conversation);
-          setShowChatbot(true);
-        }}
+        onLoadConversation={() => {}} // No longer needed since we use card format
       />
 
       {/* Session Ended Notification */}
