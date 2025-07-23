@@ -9,13 +9,13 @@ This guide explains how to set up the AI summary functionality for your journal 
 
 ## Setup Instructions
 
-### 1. Get an OpenAI API Key
+### 1. Get a Groq API Key
 
-1. Go to [OpenAI's website](https://platform.openai.com/)
+1. Go to [Groq's console](https://console.groq.com/)
 2. Sign up or log in to your account
-3. Navigate to the API section
+3. Navigate to the API keys section
 4. Create a new API key
-5. Copy the API key (it starts with `sk-`)
+5. Copy the API key (it starts with `gsk_`)
 
 ### 2. Create Environment Variables
 
@@ -29,8 +29,8 @@ NEXTAUTH_URL=http://localhost:3000
 # MongoDB Connection
 MONGODB_URI=mongodb://127.0.0.1:27017/mindgarden
 
-# OpenAI API Key
-OPENAI_API_KEY=sk-your-openai-api-key-here
+# Groq AI API Key
+GROQ_API_KEY=your-groq-api-key-here
 ```
 
 ### 3. Generate a Secure Secret
@@ -88,21 +88,21 @@ If you want a different summary for an existing entry:
 
 ### AI Summary Not Generating
 
-1. **Check API Key**: Ensure your `OPENAI_API_KEY` is correct and has sufficient credits
+1. **Check API Key**: Ensure your `GROQ_API_KEY` is correct and has sufficient credits
 2. **Check Console**: Look for error messages in your browser's developer console
 3. **Check Server Logs**: Look for error messages in your terminal where the dev server is running
 
 ### Common Issues
 
-- **"OpenAI API key not found"**: Make sure your `.env.local` file is in the project root
-- **"Failed to generate AI summary"**: Check your OpenAI API key and account status
+- **"Groq API key not found"**: Make sure your `.env.local` file is in the project root
+- **"Failed to generate AI summary"**: Check your Groq API key and account status
 - **"Unauthorized"**: Make sure you're logged in to your account
 
 ## Cost Considerations
 
-- OpenAI charges per API call (approximately $0.002 per 1K tokens)
+- Groq offers fast and cost-effective AI processing
 - Each summary typically uses 50-150 tokens
-- Monitor your usage at [OpenAI's usage dashboard](https://platform.openai.com/usage)
+- Monitor your usage at [Groq's console](https://console.groq.com/)
 
 ## Security Notes
 
