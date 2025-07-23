@@ -1,95 +1,146 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client"
+import Link from 'next/link';
+import styles from './page.module.css'
+import { useState } from 'react';
+import { signIn, useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import mind from '../../public/mind.png'
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const router = useRouter();
+  const { data: session, status } = useSession();
+  
+  useEffect(() => {
+    if (status === 'authenticated' && session) {
+      router.replace('/dashboard');
+    }
+  }, [status, session, router]);
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setIsLoading(true);
+    try {
+      if (!formData.email || !formData.password) {
+        setError('Please enter both email and password');
+        return;
+      }
+
+      const result = await signIn('credentials', {
+        email: formData.email,
+        password: formData.password,
+        redirect: false
+      });
+
+      if (result?.error) {
+        // Handle specific error messages
+        if (result.error === 'No user found with this email') {
+          setError('No account found with this email. Please sign up first.');
+        } else if (result.error === 'Incorrect password') {
+          setError('Incorrect password. Please try again.');
+        } else {
+          setError(result.error);
+        }
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      if (error.message.includes('MONGODB_URI') || error.message.includes('MongoNetworkError')) {
+        setError('Database connection error. Please ensure MongoDB is running.');
+      } else if (error.message.includes('NEXTAUTH_SECRET')) {
+        setError('Authentication configuration error. Please check environment variables.');
+      } else {
+        setError(error.message || 'An error occurred during login. Please try again.');
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (status === 'loading') {
+    return (
+      <div className={styles.container}>
+        <div className={styles.card}>
+          <h1 className={styles.title}>Loading...</h1>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <h1 className={styles.title}>
+          <img src={mind.src} alt="Mind Garden" className={styles.mindImage} />
+          Login
+        </h1>
+        <form className={styles.form} autoComplete="off" onSubmit={handleSubmit}>
+          {error && (
+            <div className={styles.error}>
+              {error}
+            </div>
+          )}
+          
+          <div className={styles.formGroup}>
+            <label className={styles.label}>
+              Email
+            </label>
+            <input 
+              className={styles.input}
+              type="email" 
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
+              onChange={handleChange}
+              autoComplete="off"
+              required
+              disabled={isLoading}
+            />
+          </div>
+          
+          <div className={styles.formGroup}>
+            <label className={styles.label}>Password</label>
+            <input 
+              className={styles.input}
+              type="password" 
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              autoComplete="new-password"
+              required
+              disabled={isLoading}
+            /> 
+          </div>
+
+          <Link href={'/signup'} className={styles.link}>
+            Don&apos;t have an account? Sign up
+          </Link>
+          
+          <button 
+            type="submit" 
+            className={styles.submitButton}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Logging in...' : 'Login'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
