@@ -128,9 +128,6 @@ export default function Home() {
             /> 
           </div>
 
-          <Link href={'/signup'} className={styles.link}>
-            Don&apos;t have an account? Sign up
-          </Link>
           
           <button 
             type="submit" 
@@ -139,6 +136,10 @@ export default function Home() {
           >
             {isLoading ? 'Logging in...' : 'Login'}
           </button>
+          <Link href={'/signup'} className={styles.link}>
+            Don&apos;t have an account? Sign up
+          </Link>
+          
         </form>
       </div>
     </div>

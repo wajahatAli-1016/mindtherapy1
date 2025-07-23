@@ -133,13 +133,14 @@ export default function Signup() {
           </div>
 
          
-          <Link href={'/'} className={styles.link}>
-            Already have an account? Login
-          </Link>
+          
           
           <button type="submit" className={styles.submitButton} disabled={loading}>
             {loading ? 'Signing Up...' : 'Sign Up'}
           </button>
+          <Link href={'/'} className={styles.link}>
+            Already have an account? Login
+          </Link>
         </form>
       </div>
     </div>

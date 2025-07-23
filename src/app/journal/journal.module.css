@@ -210,6 +210,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .entryMood {
@@ -291,6 +292,7 @@
   align-items: flex-start;
   margin-bottom: 1rem;
   gap: 1rem;
+  min-height: 2.5rem;
 }
 
 .entryTitle {
@@ -299,6 +301,12 @@
   color: rgb(10, 70, 28);
   margin: 0;
   line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  flex: 1;
+  min-width: 0;
 }
 
 .entryDate {
@@ -313,6 +321,12 @@
   line-height: 1.6;
   margin-bottom: 1rem;
   font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  max-height: 4.8rem;
 }
 
 .aiSummary {

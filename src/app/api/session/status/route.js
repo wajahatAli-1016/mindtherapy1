@@ -24,11 +24,14 @@ export async function GET(req) {
       return NextResponse.json({
         hasActiveSession: false,
         canChat: false,
+        isActive: false,
+        hasActivity: false,
         message: 'No sessions found'
       });
     }
 
     const canChat = currentSession.isActive && !currentSession.endedAt;
+    const hasActivity = currentSession.messageLog && currentSession.messageLog.length > 0;
 
     return NextResponse.json({
       hasActiveSession: true,
@@ -37,6 +40,8 @@ export async function GET(req) {
       startedAt: currentSession.startedAt,
       endedAt: currentSession.endedAt,
       isActive: currentSession.isActive,
+      hasActivity,
+      activityCount: currentSession.messageLog ? currentSession.messageLog.length : 0,
       message: canChat ? 'Session is active, you can chat' : 'Session has ended, you can only read conversations'
     });
 

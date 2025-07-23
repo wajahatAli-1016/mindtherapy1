@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from './sessions.module.css';
-import mind from '../../public/mind.png'
+import mind from '../../../public/mind.png'
 
 export default function SessionsPage() {
   const { data: session, status } = useSession();

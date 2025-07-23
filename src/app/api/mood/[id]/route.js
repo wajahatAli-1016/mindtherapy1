@@ -2,7 +2,7 @@ import {NextResponse} from 'next/server'
 import {getServerSession} from 'next-auth'
 import connectDB from '@/lib/db'
 import Mood from '@/models/Mood'
-import { authOptions } from '../auth/[...nextauth]/route';
+import { authOptions } from '../../auth/[...nextauth]/route';
 
 export async function GET(req){
     try{

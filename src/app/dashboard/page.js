@@ -66,8 +66,11 @@ export default function Dashboard() {
         const data = await response.json();
         setSessionStatus(data);
         
-        // Show notification if session has ended
-        if (!data.canChat && !showSessionEndedNotification) {
+        // Show notification only if:
+        // 1. There's a session that has ended (not for new users with no sessions)
+        // 2. The session has meaningful activity (messageLog entries)
+        // 3. The notification hasn't been shown yet
+        if (data.hasActiveSession && !data.canChat && !data.isActive && data.hasActivity && !showSessionEndedNotification) {
           setShowSessionEndedNotification(true);
         }
       }

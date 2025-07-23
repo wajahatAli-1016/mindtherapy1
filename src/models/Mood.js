@@ -16,7 +16,7 @@ const MoodSchema = new mongoose.Schema({
     },
     note:{
         type:String,
-        required:true
+        required:false
     },
     journalEntry: { type: mongoose.Schema.Types.ObjectId, ref: 'JournalEntry' },
     createdAt:{
