@@ -1674,6 +1674,10 @@
   animation: conversationCardSlideIn 0.3s ease-out;
   z-index: 1001;
 }
+.conversationCardModal .modalHeader {
+  width: 100%;
+  flex-shrink: 0;
+}
 
 @keyframes conversationCardSlideIn {
   from {
@@ -1693,15 +1697,15 @@
   padding: 1.5rem 2rem;
   background: linear-gradient(135deg, #88ecd7 0%, #c7e08c 100%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
 }
-
 .conversationCardTitle h2 {
   margin: 0 0 0.5rem 0;
   color: rgb(10, 70, 28);
   font-size: 1.5rem;
   font-weight: 700;
+  flex: 1;
 }
-
 .conversationCardMeta {
   display: flex;
   gap: 1rem;
