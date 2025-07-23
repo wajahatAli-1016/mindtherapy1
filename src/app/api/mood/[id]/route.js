@@ -3,10 +3,6 @@ import {getServerSession} from 'next-auth'
 import connectDB from '@/lib/db'
 import Mood from '@/models/Mood'
 import { authOptions } from '../../auth/[...nextauth]/route';
-<<<<<<< HEAD
-=======
-
->>>>>>> c2d60777e502327d1436da562ac217603f653cbe
 
 export async function GET(req){
     try{

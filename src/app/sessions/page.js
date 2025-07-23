@@ -5,10 +5,6 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from './sessions.module.css';
 import mind from '../../../public/mind.png'
-<<<<<<< HEAD
-=======
-
->>>>>>> c2d60777e502327d1436da562ac217603f653cbe
 
 export default function SessionsPage() {
   const { data: session, status } = useSession();
